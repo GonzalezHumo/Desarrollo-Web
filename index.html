@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gonzalez Humo Victoria Marbella Ejercicio 15 – FIM UAS</title>
+</head>
+<body bgcolor="#eaf4fc">
+
+<!-- ENCABEZADO -->
+<table width="820" align="center" border="0" cellpadding="0" cellspacing="0" style="margin-top:24px;">
+  <tr>
+    <td bgcolor="#0d2347" style="padding:18px 24px; border-bottom:4px solid #3b9de8;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <font face="Arial" color="#ffffff" size="4"><b>FACULTAD DE INGENIERÍA MOCHIS</b></font><br><br>
+            <font face="Arial" color="#7ec8f5" size="2">Universidad Autónoma de Sinaloa &nbsp;·&nbsp; Coordinación de Cómputo y Uso Escolar</font>
+          </td>
+          <td align="right">
+            <font face="Arial" color="#ffffff" size="2"><b>BITÁCORA DE PRÉSTAMO<br>DE EQUIPOS</b></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!-- MENÚ -->
+<table width="820" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tr bgcolor="#1a4a8a">
+    <td align="center" width="25%" style="border-right:1px solid #3b9de8;">
+      <a href="#nuevo" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">NUEVO PRÉSTAMO</a>
+    </td>
+    <td align="center" width="25%" style="border-right:1px solid #3b9de8;">
+      <a href="#apartar" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">APARTAR EQUIPO</a>
+    </td>
+    <td align="center" width="25%" style="border-right:1px solid #3b9de8;">
+      <a href="#registros" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">REGISTROS</a>
+    </td>
+    <td align="center" width="25%">
+      <a href="#devolucion" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">DEVOLUCIÓN</a>
+    </td>
+  </tr>
+</table>
+
+<br><br>
+
+<!-- ══════════════════
+     NUEVO PRÉSTAMO
+══════════════════ -->
+<a name="nuevo"></a>
+<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
+    <font face="Arial" color="#ffffff" size="2"><b>NUEVO PRÉSTAMO</b></font>
+  </td></tr>
+  <tr><td style="padding:24px 28px;">
+  <form method="get" action="#">
+
+    <!-- DATOS DEL SOLICITANTE -->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr><td colspan="4" bgcolor="#dceefa" style="padding:7px 14px;">
+        <font face="Arial" size="2" color="#0d2347"><b>DATOS DEL SOLICITANTE</b></font>
+      </td></tr>
+    </table>
+    <br>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Nombre(s):</font></td>
+        <td width="260" style="padding:0 24px 14px 0;"><input type="text" name="nombre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre(s)"></td>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Paterno:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="text" name="appPaterno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido paterno"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Materno:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="text" name="appMaterno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido materno"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Grupo:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="text" name="grupo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Ej. 3A"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Carrera:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="text" name="carrera" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Escribe la carrera"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Semestre:</font></td>
+        <td style="padding:0 0 14px 0;">
+          <select name="semestre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;">
+            <option value="">— Selecciona —</option>
+            <option>1°</option><option>2°</option><option>3°</option><option>4°</option><option>5°</option>
+            <option>6°</option><option>7°</option><option>8°</option><option>9°</option><option>10°</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Tipo:</font></td>
+        <td colspan="3" style="padding:0 0 6px 0;">
+          <font face="Arial" size="2">
+            <input type="radio" name="tipoSol" value="Alumno" checked> &nbsp;Alumno &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="tipoSol" value="Docente"> &nbsp;Docente
+          </font>
+        </td>
+      </tr>
+    </table>
+
+    <br><br>
+
+    <!-- DATOS DEL EQUIPO -->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr><td colspan="4" bgcolor="#dceefa" style="padding:7px 14px;">
+        <font face="Arial" size="2" color="#0d2347"><b>DATOS DEL EQUIPO</b></font>
+      </td></tr>
+    </table>
+    <br>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Tipo de Equipo:</font></td>
+        <td width="260" style="padding:0 24px 14px 0;"><input type="text" name="tipoEquipo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Escribe el equipo"></td>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Cantidad:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="number" name="cantidad" value="1" min="1" max="20" style="width:80px;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Condición:</font></td>
+        <td colspan="3" style="padding:0 0 14px 0;">
+          <select name="condicion" style="border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;min-width:200px;">
+            <option>Bueno</option>
+            <option>Regular</option>
+            <option>Dañado (documentado)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0; vertical-align:middle;"><font face="Arial" size="2">Accesorios:</font></td>
+        <td colspan="3" style="padding:0 0 14px 0;">
+          <font face="Arial" size="2">
+            <input type="checkbox" name="acc" value="Cargador"> &nbsp;Cargador &nbsp;&nbsp;
+            <input type="checkbox" name="acc" value="Cable"> &nbsp;Cable &nbsp;&nbsp;
+            <input type="checkbox" name="acc" value="Estuche"> &nbsp;Estuche &nbsp;&nbsp;
+            <input type="checkbox" name="acc" value="Control"> &nbsp;Control &nbsp;&nbsp;
+            <input type="checkbox" name="acc" value="Manual"> &nbsp;Manual &nbsp;&nbsp;
+            <input type="checkbox" name="acc" value="Mochila"> &nbsp;Mochila
+          </font>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 6px 0; vertical-align:top; padding-top:5px;"><font face="Arial" size="2">Observaciones:</font></td>
+        <td colspan="3" style="padding:0 0 6px 0;">
+          <textarea name="obsEquipo" rows="3" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Daños previos, notas importantes…"></textarea>
+        </td>
+      </tr>
+    </table>
+
+    <br><br>
+
+    <!-- FECHAS Y AUTORIZACIÓN -->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr><td colspan="4" bgcolor="#dceefa" style="padding:7px 14px;">
+        <font face="Arial" size="2" color="#0d2347"><b>FECHAS Y AUTORIZACIÓN</b></font>
+      </td></tr>
+    </table>
+    <br>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">F. Préstamo:</font></td>
+        <td width="260" style="padding:0 24px 14px 0;"><input type="date" name="fechaPrestamo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora Salida:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="time" name="horaSalida" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">F. Devolución:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="date" name="fechaDevolucion" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora Dev.:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="time" name="horaDevolucion" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Encargado:</font></td>
+        <td style="padding:0 24px 6px 0;"><input type="text" name="encargado" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre del encargado"></td>
+        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Propósito:</font></td>
+        <td style="padding:0 0 6px 0;"><input type="text" name="proposito" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Materia, evento…"></td>
+      </tr>
+    </table>
+
+    <br><br>
+
+    <input type="submit" value="⊕ Registrar Préstamo" style="background:#1e6fc0;color:#fff;border:none;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
+    &nbsp;&nbsp;
+    <input type="reset" value="↺ Limpiar" style="background:#fff;color:#1e6fc0;border:2px solid #1e6fc0;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
+
+  </form>
+  </td></tr>
+</table>
+
+<br><br>
+
+<!-- ══════════════════
+     APARTAR EQUIPO
+══════════════════ -->
+<a name="apartar"></a>
+<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
+    <font face="Arial" color="#ffffff" size="2"><b>APARTAR EQUIPO</b></font>
+  </td></tr>
+  <tr><td style="padding:24px 28px;">
+  <form method="get" action="#">
+
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Nombre(s):</font></td>
+        <td width="260" style="padding:0 24px 14px 0;"><input type="text" name="ap_nombre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre(s)"></td>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Paterno:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="text" name="ap_paterno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido paterno"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Materno:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="text" name="ap_materno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido materno"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Tipo:</font></td>
+        <td style="padding:0 0 14px 0;">
+          <font face="Arial" size="2">
+            <input type="radio" name="ap_tipo" value="Alumno" checked> &nbsp;Alumno &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="ap_tipo" value="Docente"> &nbsp;Docente
+          </font>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Equipo:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="text" name="ap_equipo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Ej. Laptop, Proyector…"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Cantidad:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="number" name="ap_cantidad" value="1" min="1" max="20" style="width:80px;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Fecha:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="date" name="ap_fecha" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="time" name="ap_hora" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+      </tr>
+    </table>
+
+    <br><br>
+
+    <input type="submit" value="📋 Apartar Equipo" style="background:#1e6fc0;color:#fff;border:none;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
+    &nbsp;&nbsp;
+    <input type="reset" value="↺ Limpiar" style="background:#fff;color:#1e6fc0;border:2px solid #1e6fc0;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
+
+  </form>
+
+  <br><br>
+
+  <!-- Tabla equipos apartados -->
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr><td colspan="9" bgcolor="#dceefa" style="padding:7px 14px;">
+      <font face="Arial" size="2" color="#0d2347"><b>EQUIPOS APARTADOS</b></font>
+    </td></tr>
+  </table>
+  <br>
+  <table width="100%" border="1" bordercolor="#3b9de8" cellpadding="10" cellspacing="0">
+    <tr bgcolor="#1e6fc0">
+      <td><font face="Arial" color="#fff" size="2"><b>#</b></font></td>
+      <td><font face="Arial" color="#fff" size="2"><b>Nombre</b></font></td>
+      <td><font face="Arial" color="#fff" size="2"><b>Tipo</b></font></td>
+      <td><font face="Arial" color="#fff" size="2"><b>Equipo</b></font></td>
+      <td><font face="Arial" color="#fff" size="2"><b>Cant.</b></font></td>
+      <td><font face="Arial" color="#fff" size="2"><b>Fecha(necesita)</b></font></td>
+      <td><font face="Arial" color="#fff" size="2"><b>Hora (necesita)</b></font></td>
+      <td><font face="Arial" color="#fff" size="2"><b>Estado</b></font></td>
+    </tr>
+    <tr bgcolor="#eaf4fc">
+      <td><font face="Arial" size="2">001</font></td>
+      <td><font face="Arial" size="2">Ana López Soto</font></td>
+      <td><font face="Arial" size="2">Alumno</font></td>
+      <td><font face="Arial" size="2">Proyector</font></td>
+      <td><font face="Arial" size="2">1</font></td>
+      <td><font face="Arial" size="2">2026-02-21</font></td>
+      <td><font face="Arial" size="2">09:00</font></td>
+      <td bgcolor="#cce4f7"><font face="Arial" size="2" color="#0d2347"><b>Apartado ✔</b></font></td>
+    </tr>
+    <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  </table>
+
+  </td></tr>
+</table>
+
+<br><br>
+
+<!-- ══════════════════
+     REGISTROS
+══════════════════ -->
+<a name="registros"></a>
+<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
+    <font face="Arial" color="#ffffff" size="2"><b>BITÁCORA DE PRÉSTAMOS</b></font>
+  </td></tr>
+  <tr><td style="padding:24px 28px;">
+    <table width="100%" border="1" bordercolor="#3b9de8" cellpadding="10" cellspacing="0">
+      <tr bgcolor="#1e6fc0">
+        <td><font face="Arial" color="#fff" size="2"><b>#</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Nombre</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Grupo / Carrera</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Tipo</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Equipo</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Cant.</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Condición</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>F. Préstamo</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>F. Devolución</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Encargado</b></font></td>
+        <td><font face="Arial" color="#fff" size="2"><b>Estado</b></font></td>
+      </tr>
+      <tr bgcolor="#eaf4fc">
+        <td><font face="Arial" size="2">001</font></td>
+        <td><font face="Arial" size="2">Juan Pérez López</font></td>
+        <td><font face="Arial" size="2">3A / ISC</font></td>
+        <td><font face="Arial" size="2">Alumno</font></td>
+        <td><font face="Arial" size="2">Laptop</font></td>
+        <td><font face="Arial" size="2">1</font></td>
+        <td><font face="Arial" size="2">Bueno</font></td>
+        <td><font face="Arial" size="2">2026-02-19</font></td>
+        <td><font face="Arial" size="2">2026-02-20</font></td>
+        <td><font face="Arial" size="2">Lic. Méndez</font></td>
+        <td bgcolor="#cce4f7"><font face="Arial" size="2" color="#0d2347"><b>Prestado</b></font></td>
+      </tr>
+      <tr bgcolor="#ffffff">
+        <td><font face="Arial" size="2">002</font></td>
+        <td><font face="Arial" size="2">María García Ruiz</font></td>
+        <td><font face="Arial" size="2">5B / IND</font></td>
+        <td><font face="Arial" size="2">Alumno</font></td>
+        <td><font face="Arial" size="2">Proyector</font></td>
+        <td><font face="Arial" size="2">1</font></td>
+        <td><font face="Arial" size="2">Bueno</font></td>
+        <td><font face="Arial" size="2">2026-02-18</font></td>
+        <td><font face="Arial" size="2">2026-02-18</font></td>
+        <td><font face="Arial" size="2">Ing. Torres</font></td>
+        <td bgcolor="#d4edda"><font face="Arial" size="2" color="#155724"><b>Devuelto</b></font></td>
+      </tr>
+      <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </table>
+  </td></tr>
+</table>
+
+<br><br>
+
+<!-- ══════════════════
+     DEVOLUCIÓN
+══════════════════ -->
+<a name="devolucion"></a>
+<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
+    <font face="Arial" color="#ffffff" size="2"><b>REGISTRAR DEVOLUCIÓN</b></font>
+  </td></tr>
+  <tr><td style="padding:24px 28px;">
+  <form method="get" action="#">
+
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">N.° Registro:</font></td>
+        <td width="260" style="padding:0 24px 14px 0;"><input type="number" name="devId" placeholder="Ej. 001" min="1" style="width:90px;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Nombre:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="text" name="devNombre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre completo"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Equipo:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="text" name="devEquipo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Tipo de equipo"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Condición:</font></td>
+        <td style="padding:0 0 14px 0;">
+          <select name="devCondicion" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;">
+            <option>Bueno</option>
+            <option>Regular</option>
+            <option>Con daño nuevo</option>
+            <option>Deteriorado</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Fecha Dev.:</font></td>
+        <td style="padding:0 24px 14px 0;"><input type="date" name="devFecha" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora:</font></td>
+        <td style="padding:0 0 14px 0;"><input type="time" name="devHora" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
+      </tr>
+      <tr>
+        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Encargado:</font></td>
+        <td style="padding:0 24px 6px 0;"><input type="text" name="devEncargado" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Quien recibe"></td>
+        <td style="padding:0 10px 6px 0; vertical-align:top; padding-top:4px;"><font face="Arial" size="2">Observaciones:</font></td>
+        <td style="padding:0 0 6px 0;"><textarea name="devObs" rows="3" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Notas sobre el estado del equipo…"></textarea></td>
+      </tr>
+    </table>
+
+    <br><br>
+
+    <input type="submit" value="✔ Confirmar Devolución" style="background:#1aad65;color:#fff;border:none;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
+    &nbsp;&nbsp;
+    <input type="reset" value="↺ Limpiar" style="background:#fff;color:#1e6fc0;border:2px solid #1e6fc0;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
+
+  </form>
+  </td></tr>
+</table>
+
+<br><br>
+
+<table width="820" align="center" border="0">
+  <tr><td align="center" style="padding-bottom:20px;">
+    <font face="Arial" size="1" color="#888">Facultad de Ingeniería Mochis – Universidad Autónoma de Sinaloa</font>
+  </td></tr>
+</table>
+
+</body>
+</html>
