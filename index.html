@@ -1,407 +1,673 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Gonzalez Humo Victoria Marbella Ejercicio 15 – FIM UAS</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gonzalez Humo Victoria Marbella_Ejercicio1-16 – FIM UAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --navy:      #0b1f45;
+      --blue:      #1a4a8a;
+      --accent:    #2e8de8;
+      --sky:       #d6ecfa;
+      --mint:      #1aad65;
+      --white:     #ffffff;
+      --gray-bg:   #f0f6fc;
+      --gray-line: #c4ddf2;
+      --text:      #1a2a40;
+      --text-light:#5a7a9a;
+      --shadow:    0 4px 24px rgba(14,55,120,0.10);
+      --radius:    14px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--gray-bg);
+      background-image:
+        radial-gradient(ellipse at 10% 20%, #c9e4f9 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 80%, #d0f0e4 0%, transparent 55%);
+      min-height: 100vh;
+      padding: 32px 16px 60px;
+    }
+
+    header {
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--navy) 60%, #14336e);
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 28px 36px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    header .brand h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: .5px;
+    }
+
+    header .brand p {
+      font-size: .78rem;
+      color: #7ec8f5;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    header .badge {
+      text-align: right;
+      color: var(--white);
+      font-size: .8rem;
+      font-weight: 700;
+      line-height: 1.5;
+      opacity: .85;
+    }
+
+    nav {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #1a4a8a;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 3px solid var(--accent);
+    }
+
+    nav a {
+      display: block;
+      padding: 14px 6px;
+      text-align: center;
+      color: #b0d4f1;
+      text-decoration: none;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,.12);
+      transition: background .2s, color .2s;
+    }
+    nav a:last-child { border-right: none; }
+    nav a:hover { background: var(--accent); color: var(--white); }
+
+    .main-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding-top: 32px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--gray-line);
+      animation: fadeUp .45s ease both;
+    }
+
+    .card-header {
+      background: linear-gradient(90deg, var(--blue) 0%, #225ba3 100%);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header h2 {
+      color: var(--white);
+      font-size: .9rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .card-body { padding: 30px 32px; }
+
+    .group-label {
+      background: var(--sky);
+      border-left: 4px solid var(--accent);
+      padding: 8px 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 20px;
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="date"],
+    .form-group input[type="time"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1.5px solid var(--gray-line);
+      border-radius: var(--radius-sm);
+      padding: 9px 13px;
+      font-family: 'Nunito', sans-serif;
+      font-size: .9rem;
+      color: var(--text);
+      background: #fafdff;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(46,141,232,.15);
+      background: var(--white);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      padding: 9px 0;
+    }
+    .radio-group label {
+      text-transform: none;
+      font-size: .9rem;
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .radio-group input { accent-color: var(--accent); width: 16px; height: 16px; }
+
+    .check-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      align-items: center;
+      padding: 6px 0;
+    }
+    .check-row label {
+      font-size: .88rem;
+      color: var(--text);
+      font-weight: 600;
+      text-transform: none;
+    }
+    .check-row input { accent-color: var(--accent); width: 15px; height: 15px; }
+
+    .full-width { grid-column: 1 / -1; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2176d9, var(--accent));
+      color: var(--white);
+      border: none;
+      padding: 11px 28px;
+      border-radius: var(--radius-sm);
+      font-family: 'Nunito', sans-serif;
+      font-size: .88rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(46,141,232,.35);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-green {
+      background: linear-gradient(135deg, #12934f, var(--mint));
+      color: var(--white);
+      border: none;
+      padding: 11px 28px;
+      border-radius: var(--radius-sm);
+      font-family: 'Nunito', sans-serif;
+      font-size: .88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s;
+    }
+    .btn-green:hover { transform: translateY(-2px); }
+
+    .btn-reset {
+      background: var(--white);
+      color: var(--blue);
+      border: 2px solid var(--accent);
+      padding: 11px 28px;
+      border-radius: var(--radius-sm);
+      font-family: 'Nunito', sans-serif;
+      font-size: .88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-reset:hover { background: var(--sky); }
+
+    .btn-row { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+
+    .data-table thead tr {
+      background: linear-gradient(90deg, var(--blue), #2669b5);
+    }
+
+    .data-table thead th {
+      padding: 12px 14px;
+      color: var(--white);
+      font-weight: 700;
+      text-align: left;
+      font-size: .78rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .data-table tbody tr {
+      border-bottom: 1px solid var(--gray-line);
+      transition: background .15s;
+    }
+    .data-table tbody tr:hover { background: #f0f7ff; }
+    .data-table tbody tr:nth-child(odd)  { background: #fafdff; }
+    .data-table tbody tr:nth-child(even) { background: var(--white); }
+
+    .data-table tbody td {
+      padding: 11px 14px;
+      color: var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .8rem;
+    }
+
+    .badge-prestado,
+    .badge-apartado,
+    .badge-devuelto {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 30px;
+      font-size: .75rem;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+    }
+    .badge-prestado { background: #d0e8ff; color: #0b3d8a; }
+    .badge-apartado { background: #d0e8ff; color: #0b3d8a; }
+    .badge-devuelto { background: #cff5e2; color: #0e5c33; }
+
+    footer {
+      max-width: 900px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: .75rem;
+      color: var(--text-light);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card:nth-child(1) { animation-delay: .05s; }
+    .card:nth-child(2) { animation-delay: .15s; }
+    .card:nth-child(3) { animation-delay: .25s; }
+    .card:nth-child(4) { animation-delay: .35s; }
+
+    @media (max-width: 640px) {
+      header { flex-direction: column; gap: 12px; text-align: center; }
+      nav { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+      .card-body { padding: 20px 18px; }
+    }
+
+  </style>
 </head>
-<body bgcolor="#eaf4fc">
+<body>
 
 <!-- ENCABEZADO -->
-<table width="820" align="center" border="0" cellpadding="0" cellspacing="0" style="margin-top:24px;">
-  <tr>
-    <td bgcolor="#0d2347" style="padding:18px 24px; border-bottom:4px solid #3b9de8;">
-      <table width="100%" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td>
-            <font face="Arial" color="#ffffff" size="4"><b>FACULTAD DE INGENIERÍA MOCHIS</b></font><br><br>
-            <font face="Arial" color="#7ec8f5" size="2">Universidad Autónoma de Sinaloa &nbsp;·&nbsp; Coordinación de Cómputo y Uso Escolar</font>
-          </td>
-          <td align="right">
-            <font face="Arial" color="#ffffff" size="2"><b>BITÁCORA DE PRÉSTAMO<br>DE EQUIPOS</b></font>
-          </td>
-        </tr>
+<header>
+  <div class="brand">
+    <h1>FACULTAD DE INGENIERÍA MOCHIS</h1>
+    <p>Universidad Autónoma de Sinaloa · Coordinación de Cómputo </p>
+  </div>
+  <div class="badge">BITÁCORA DE PRÉSTAMO<br>DE EQUIPOS</div>
+</header>
+
+<!-- NAVEGACIÓN -->
+<nav>
+  <a href="#nuevo"> Nuevo Préstamo</a>
+  <a href="#apartar"> Apartar Equipo</a>
+  <a href="#registros"> Registros</a>
+  <a href="#devolucion"> Devolución</a>
+</nav>
+
+<div class="main-wrapper">
+
+  <!-- NUEVO PRÉSTAMO -->
+  <section class="card" id="nuevo">
+    <div class="card-header">
+      <span></span>
+      <h2>Nuevo Préstamo</h2>
+    </div>
+    <div class="card-body">
+      <form method="get" action="#">
+
+        <div class="group-label">Datos del Solicitante</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nombre">Nombre(s)</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre(s)">
+          </div>
+          <div class="form-group">
+            <label for="appPaterno">Apellido Paterno</label>
+            <input type="text" id="appPaterno" name="appPaterno" placeholder="Apellido paterno">
+          </div>
+          <div class="form-group">
+            <label for="appMaterno">Apellido Materno</label>
+            <input type="text" id="appMaterno" name="appMaterno" placeholder="Apellido materno">
+          </div>
+          <div class="form-group">
+            <label for="grupo">Grupo</label>
+            <input type="text" id="grupo" name="grupo" placeholder="Ej. 3A">
+          </div>
+          <div class="form-group">
+            <label for="carrera">Carrera</label>
+            <input type="text" id="carrera" name="carrera" placeholder="Escribe la carrera">
+          </div>
+          <div class="form-group">
+            <label for="semestre">Semestre</label>
+            <select id="semestre" name="semestre">
+              <option value="">— Selecciona —</option>
+              <option>1°</option><option>2°</option><option>3°</option><option>4°</option>
+              <option>5°</option><option>6°</option><option>7°</option><option>8°</option>
+              <option>9°</option><option>10°</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Tipo de Solicitante</label>
+            <div class="radio-group">
+              <input type="radio" id="alumno" name="tipoSol" value="Alumno" checked>
+              <label for="alumno">Alumno</label>
+              <input type="radio" id="docente" name="tipoSol" value="Docente">
+              <label for="docente">Docente</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="group-label">Datos del Equipo</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="tipoEquipo">Tipo de Equipo</label>
+            <input type="text" id="tipoEquipo" name="tipoEquipo" placeholder="Ej. Laptop, Proyector…">
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="20">
+          </div>
+          <div class="form-group full-width">
+            <label for="condicion">Condición</label>
+            <select id="condicion" name="condicion" style="max-width:260px;">
+              <option>Bueno</option>
+              <option>Regular</option>
+              <option>Dañado (documentado)</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Accesorios</label>
+            <div class="check-row">
+              <input type="checkbox" id="acc-cargador" name="acc" value="Cargador">
+              <label for="acc-cargador">Cargador</label>
+              <input type="checkbox" id="acc-cable" name="acc" value="Cable">
+              <label for="acc-cable">Cable</label>
+              <input type="checkbox" id="acc-estuche" name="acc" value="Estuche">
+              <label for="acc-estuche">Estuche</label>
+              <input type="checkbox" id="acc-control" name="acc" value="Control">
+              <label for="acc-control">Control</label>
+              <input type="checkbox" id="acc-manual" name="acc" value="Manual">
+              <label for="acc-manual">Manual</label>
+              <input type="checkbox" id="acc-mochila" name="acc" value="Mochila">
+              <label for="acc-mochila">Mochila</label>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="obsEquipo">Observaciones</label>
+            <textarea id="obsEquipo" name="obsEquipo" rows="3" placeholder="Daños previos, notas importantes…"></textarea>
+          </div>
+        </div>
+
+        <div class="group-label">Fechas y Autorización</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fechaPrestamo">Fecha Préstamo</label>
+            <input type="date" id="fechaPrestamo" name="fechaPrestamo">
+          </div>
+          <div class="form-group">
+            <label for="horaSalida">Hora Salida</label>
+            <input type="time" id="horaSalida" name="horaSalida">
+          </div>
+          <div class="form-group">
+            <label for="fechaDevolucion">Fecha Devolución</label>
+            <input type="date" id="fechaDevolucion" name="fechaDevolucion">
+          </div>
+          <div class="form-group">
+            <label for="horaDevolucion">Hora Devolución</label>
+            <input type="time" id="horaDevolucion" name="horaDevolucion">
+          </div>
+          <div class="form-group">
+            <label for="encargado">Encargado</label>
+            <input type="text" id="encargado" name="encargado" placeholder="Nombre del encargado">
+          </div>
+          <div class="form-group">
+            <label for="proposito">Propósito</label>
+            <input type="text" id="proposito" name="proposito" placeholder="Materia, evento…">
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="btn-primary"> Registrar Préstamo</button>
+          <button type="reset" class="btn-reset"> Limpiar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- APARTAR EQUIPO -->
+  <section class="card" id="apartar">
+    <div class="card-header">
+      <span></span>
+      <h2>Apartar Equipo</h2>
+    </div>
+    <div class="card-body">
+      <form method="get" action="#">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="ap_nombre">Nombre(s)</label>
+            <input type="text" id="ap_nombre" name="ap_nombre" placeholder="Nombre(s)">
+          </div>
+          <div class="form-group">
+            <label for="ap_paterno">Apellido Paterno</label>
+            <input type="text" id="ap_paterno" name="ap_paterno" placeholder="Apellido paterno">
+          </div>
+          <div class="form-group">
+            <label for="ap_materno">Apellido Materno</label>
+            <input type="text" id="ap_materno" name="ap_materno" placeholder="Apellido materno">
+          </div>
+          <div class="form-group">
+            <label>Tipo</label>
+            <div class="radio-group">
+              <input type="radio" id="ap_alumno" name="ap_tipo" value="Alumno" checked>
+              <label for="ap_alumno">Alumno</label>
+              <input type="radio" id="ap_docente" name="ap_tipo" value="Docente">
+              <label for="ap_docente">Docente</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ap_equipo">Equipo</label>
+            <input type="text" id="ap_equipo" name="ap_equipo" placeholder="Ej. Laptop, Proyector…">
+          </div>
+          <div class="form-group">
+            <label for="ap_cantidad">Cantidad</label>
+            <input type="number" id="ap_cantidad" name="ap_cantidad" value="1" min="1" max="20">
+          </div>
+          <div class="form-group">
+            <label for="ap_fecha">Fecha</label>
+            <input type="date" id="ap_fecha" name="ap_fecha">
+          </div>
+          <div class="form-group">
+            <label for="ap_hora">Hora</label>
+            <input type="time" id="ap_hora" name="ap_hora">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="btn-primary"> Apartar Equipo</button>
+          <button type="reset" class="btn-reset"> Limpiar</button>
+        </div>
+      </form>
+
+      <br>
+      <div class="group-label">Equipos Apartados</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Nombre</th><th>Tipo</th><th>Equipo</th>
+            <th>Cant.</th><th>Fecha</th><th>Hora</th><th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td><td>Ana López Soto</td><td>Alumno</td><td>Proyector</td>
+            <td>1</td><td>2026-02-21</td><td>09:00</td>
+            <td><span class="badge-apartado">Apartado </span></td>
+          </tr>
+          <tr><td colspan="8">&nbsp;</td></tr>
+          <tr><td colspan="8">&nbsp;</td></tr>
+        </tbody>
       </table>
-    </td>
-  </tr>
-</table>
+    </div>
+  </section>
 
-<!-- MENÚ -->
-<table width="820" align="center" border="0" cellpadding="0" cellspacing="0">
-  <tr bgcolor="#1a4a8a">
-    <td align="center" width="25%" style="border-right:1px solid #3b9de8;">
-      <a href="#nuevo" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">NUEVO PRÉSTAMO</a>
-    </td>
-    <td align="center" width="25%" style="border-right:1px solid #3b9de8;">
-      <a href="#apartar" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">APARTAR EQUIPO</a>
-    </td>
-    <td align="center" width="25%" style="border-right:1px solid #3b9de8;">
-      <a href="#registros" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">REGISTROS</a>
-    </td>
-    <td align="center" width="25%">
-      <a href="#devolucion" style="display:block;padding:12px 0;color:#ffffff;text-decoration:none;font-family:Arial;font-size:12px;font-weight:bold;">DEVOLUCIÓN</a>
-    </td>
-  </tr>
-</table>
+  <!-- REGISTROS -->
+  <section class="card" id="registros">
+    <div class="card-header">
+      <span></span>
+      <h2>Bitácora de Préstamos</h2>
+    </div>
+    <div class="card-body">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Nombre</th><th>Grupo / Carrera</th><th>Tipo</th>
+            <th>Equipo</th><th>Cant.</th><th>Condición</th>
+            <th>F. Préstamo</th><th>F. Devolución</th><th>Encargado</th><th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td><td>Juan Pérez López</td><td>3A / ISC</td><td>Alumno</td>
+            <td>Laptop</td><td>1</td><td>Bueno</td>
+            <td>2026-02-19</td><td>2026-02-20</td><td>Lic. Méndez</td>
+            <td><span class="badge-prestado">Prestado</span></td>
+          </tr>
+          <tr>
+            <td>002</td><td>María García Ruiz</td><td>5B / IND</td><td>Alumno</td>
+            <td>Proyector</td><td>1</td><td>Bueno</td>
+            <td>2026-02-18</td><td>2026-02-18</td><td>Ing. Torres</td>
+            <td><span class="badge-devuelto">Devuelto </span></td>
+          </tr>
+          <tr><td colspan="11">&nbsp;</td></tr>
+          <tr><td colspan="11">&nbsp;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-<br><br>
+  <!-- DEVOLUCIÓN -->
+  <section class="card" id="devolucion">
+    <div class="card-header">
+      <span></span>
+      <h2>Registrar Devolución</h2>
+    </div>
+    <div class="card-body">
+      <form method="get" action="#">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="devId">N.° Registro</label>
+            <input type="number" id="devId" name="devId" placeholder="Ej. 001" min="1">
+          </div>
+          <div class="form-group">
+            <label for="devNombre">Nombre Completo</label>
+            <input type="text" id="devNombre" name="devNombre" placeholder="Nombre completo">
+          </div>
+          <div class="form-group">
+            <label for="devEquipo">Equipo</label>
+            <input type="text" id="devEquipo" name="devEquipo" placeholder="Tipo de equipo">
+          </div>
+          <div class="form-group">
+            <label for="devCondicion">Condición al Devolver</label>
+            <select id="devCondicion" name="devCondicion">
+              <option>Bueno</option>
+              <option>Regular</option>
+              <option>Con daño nuevo</option>
+              <option>Deteriorado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="devFecha">Fecha Devolución</label>
+            <input type="date" id="devFecha" name="devFecha">
+          </div>
+          <div class="form-group">
+            <label for="devHora">Hora</label>
+            <input type="time" id="devHora" name="devHora">
+          </div>
+          <div class="form-group">
+            <label for="devEncargado">Encargado que Recibe</label>
+            <input type="text" id="devEncargado" name="devEncargado" placeholder="Quien recibe">
+          </div>
+          <div class="form-group">
+            <label for="devObs">Observaciones</label>
+            <textarea id="devObs" name="devObs" rows="3" placeholder="Notas sobre el estado del equipo…"></textarea>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="btn-green"> Confirmar Devolución</button>
+          <button type="reset" class="btn-reset"> Limpiar</button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-<!-- ══════════════════
-     NUEVO PRÉSTAMO
-══════════════════ -->
-<a name="nuevo"></a>
-<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
-  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
-    <font face="Arial" color="#ffffff" size="2"><b>NUEVO PRÉSTAMO</b></font>
-  </td></tr>
-  <tr><td style="padding:24px 28px;">
-  <form method="get" action="#">
+</div>
 
-    <!-- DATOS DEL SOLICITANTE -->
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr><td colspan="4" bgcolor="#dceefa" style="padding:7px 14px;">
-        <font face="Arial" size="2" color="#0d2347"><b>DATOS DEL SOLICITANTE</b></font>
-      </td></tr>
-    </table>
-    <br>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Nombre(s):</font></td>
-        <td width="260" style="padding:0 24px 14px 0;"><input type="text" name="nombre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre(s)"></td>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Paterno:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="text" name="appPaterno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido paterno"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Materno:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="text" name="appMaterno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido materno"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Grupo:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="text" name="grupo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Ej. 3A"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Carrera:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="text" name="carrera" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Escribe la carrera"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Semestre:</font></td>
-        <td style="padding:0 0 14px 0;">
-          <select name="semestre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;">
-            <option value="">— Selecciona —</option>
-            <option>1°</option><option>2°</option><option>3°</option><option>4°</option><option>5°</option>
-            <option>6°</option><option>7°</option><option>8°</option><option>9°</option><option>10°</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Tipo:</font></td>
-        <td colspan="3" style="padding:0 0 6px 0;">
-          <font face="Arial" size="2">
-            <input type="radio" name="tipoSol" value="Alumno" checked> &nbsp;Alumno &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="tipoSol" value="Docente"> &nbsp;Docente
-          </font>
-        </td>
-      </tr>
-    </table>
-
-    <br><br>
-
-    <!-- DATOS DEL EQUIPO -->
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr><td colspan="4" bgcolor="#dceefa" style="padding:7px 14px;">
-        <font face="Arial" size="2" color="#0d2347"><b>DATOS DEL EQUIPO</b></font>
-      </td></tr>
-    </table>
-    <br>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Tipo de Equipo:</font></td>
-        <td width="260" style="padding:0 24px 14px 0;"><input type="text" name="tipoEquipo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Escribe el equipo"></td>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Cantidad:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="number" name="cantidad" value="1" min="1" max="20" style="width:80px;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Condición:</font></td>
-        <td colspan="3" style="padding:0 0 14px 0;">
-          <select name="condicion" style="border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;min-width:200px;">
-            <option>Bueno</option>
-            <option>Regular</option>
-            <option>Dañado (documentado)</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0; vertical-align:middle;"><font face="Arial" size="2">Accesorios:</font></td>
-        <td colspan="3" style="padding:0 0 14px 0;">
-          <font face="Arial" size="2">
-            <input type="checkbox" name="acc" value="Cargador"> &nbsp;Cargador &nbsp;&nbsp;
-            <input type="checkbox" name="acc" value="Cable"> &nbsp;Cable &nbsp;&nbsp;
-            <input type="checkbox" name="acc" value="Estuche"> &nbsp;Estuche &nbsp;&nbsp;
-            <input type="checkbox" name="acc" value="Control"> &nbsp;Control &nbsp;&nbsp;
-            <input type="checkbox" name="acc" value="Manual"> &nbsp;Manual &nbsp;&nbsp;
-            <input type="checkbox" name="acc" value="Mochila"> &nbsp;Mochila
-          </font>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 6px 0; vertical-align:top; padding-top:5px;"><font face="Arial" size="2">Observaciones:</font></td>
-        <td colspan="3" style="padding:0 0 6px 0;">
-          <textarea name="obsEquipo" rows="3" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Daños previos, notas importantes…"></textarea>
-        </td>
-      </tr>
-    </table>
-
-    <br><br>
-
-    <!-- FECHAS Y AUTORIZACIÓN -->
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr><td colspan="4" bgcolor="#dceefa" style="padding:7px 14px;">
-        <font face="Arial" size="2" color="#0d2347"><b>FECHAS Y AUTORIZACIÓN</b></font>
-      </td></tr>
-    </table>
-    <br>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">F. Préstamo:</font></td>
-        <td width="260" style="padding:0 24px 14px 0;"><input type="date" name="fechaPrestamo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora Salida:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="time" name="horaSalida" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">F. Devolución:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="date" name="fechaDevolucion" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora Dev.:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="time" name="horaDevolucion" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Encargado:</font></td>
-        <td style="padding:0 24px 6px 0;"><input type="text" name="encargado" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre del encargado"></td>
-        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Propósito:</font></td>
-        <td style="padding:0 0 6px 0;"><input type="text" name="proposito" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Materia, evento…"></td>
-      </tr>
-    </table>
-
-    <br><br>
-
-    <input type="submit" value="⊕ Registrar Préstamo" style="background:#1e6fc0;color:#fff;border:none;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
-    &nbsp;&nbsp;
-    <input type="reset" value="↺ Limpiar" style="background:#fff;color:#1e6fc0;border:2px solid #1e6fc0;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
-
-  </form>
-  </td></tr>
-</table>
-
-<br><br>
-
-<!-- ══════════════════
-     APARTAR EQUIPO
-══════════════════ -->
-<a name="apartar"></a>
-<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
-  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
-    <font face="Arial" color="#ffffff" size="2"><b>APARTAR EQUIPO</b></font>
-  </td></tr>
-  <tr><td style="padding:24px 28px;">
-  <form method="get" action="#">
-
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Nombre(s):</font></td>
-        <td width="260" style="padding:0 24px 14px 0;"><input type="text" name="ap_nombre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre(s)"></td>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Paterno:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="text" name="ap_paterno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido paterno"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Ap. Materno:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="text" name="ap_materno" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Apellido materno"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Tipo:</font></td>
-        <td style="padding:0 0 14px 0;">
-          <font face="Arial" size="2">
-            <input type="radio" name="ap_tipo" value="Alumno" checked> &nbsp;Alumno &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="ap_tipo" value="Docente"> &nbsp;Docente
-          </font>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Equipo:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="text" name="ap_equipo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Ej. Laptop, Proyector…"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Cantidad:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="number" name="ap_cantidad" value="1" min="1" max="20" style="width:80px;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Fecha:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="date" name="ap_fecha" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="time" name="ap_hora" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-      </tr>
-    </table>
-
-    <br><br>
-
-    <input type="submit" value="📋 Apartar Equipo" style="background:#1e6fc0;color:#fff;border:none;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
-    &nbsp;&nbsp;
-    <input type="reset" value="↺ Limpiar" style="background:#fff;color:#1e6fc0;border:2px solid #1e6fc0;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
-
-  </form>
-
-  <br><br>
-
-  <!-- Tabla equipos apartados -->
-  <table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <tr><td colspan="9" bgcolor="#dceefa" style="padding:7px 14px;">
-      <font face="Arial" size="2" color="#0d2347"><b>EQUIPOS APARTADOS</b></font>
-    </td></tr>
-  </table>
-  <br>
-  <table width="100%" border="1" bordercolor="#3b9de8" cellpadding="10" cellspacing="0">
-    <tr bgcolor="#1e6fc0">
-      <td><font face="Arial" color="#fff" size="2"><b>#</b></font></td>
-      <td><font face="Arial" color="#fff" size="2"><b>Nombre</b></font></td>
-      <td><font face="Arial" color="#fff" size="2"><b>Tipo</b></font></td>
-      <td><font face="Arial" color="#fff" size="2"><b>Equipo</b></font></td>
-      <td><font face="Arial" color="#fff" size="2"><b>Cant.</b></font></td>
-      <td><font face="Arial" color="#fff" size="2"><b>Fecha(necesita)</b></font></td>
-      <td><font face="Arial" color="#fff" size="2"><b>Hora (necesita)</b></font></td>
-      <td><font face="Arial" color="#fff" size="2"><b>Estado</b></font></td>
-    </tr>
-    <tr bgcolor="#eaf4fc">
-      <td><font face="Arial" size="2">001</font></td>
-      <td><font face="Arial" size="2">Ana López Soto</font></td>
-      <td><font face="Arial" size="2">Alumno</font></td>
-      <td><font face="Arial" size="2">Proyector</font></td>
-      <td><font face="Arial" size="2">1</font></td>
-      <td><font face="Arial" size="2">2026-02-21</font></td>
-      <td><font face="Arial" size="2">09:00</font></td>
-      <td bgcolor="#cce4f7"><font face="Arial" size="2" color="#0d2347"><b>Apartado ✔</b></font></td>
-    </tr>
-    <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-    <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-    <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-    <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-  </table>
-
-  </td></tr>
-</table>
-
-<br><br>
-
-<!-- ══════════════════
-     REGISTROS
-══════════════════ -->
-<a name="registros"></a>
-<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
-  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
-    <font face="Arial" color="#ffffff" size="2"><b>BITÁCORA DE PRÉSTAMOS</b></font>
-  </td></tr>
-  <tr><td style="padding:24px 28px;">
-    <table width="100%" border="1" bordercolor="#3b9de8" cellpadding="10" cellspacing="0">
-      <tr bgcolor="#1e6fc0">
-        <td><font face="Arial" color="#fff" size="2"><b>#</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Nombre</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Grupo / Carrera</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Tipo</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Equipo</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Cant.</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Condición</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>F. Préstamo</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>F. Devolución</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Encargado</b></font></td>
-        <td><font face="Arial" color="#fff" size="2"><b>Estado</b></font></td>
-      </tr>
-      <tr bgcolor="#eaf4fc">
-        <td><font face="Arial" size="2">001</font></td>
-        <td><font face="Arial" size="2">Juan Pérez López</font></td>
-        <td><font face="Arial" size="2">3A / ISC</font></td>
-        <td><font face="Arial" size="2">Alumno</font></td>
-        <td><font face="Arial" size="2">Laptop</font></td>
-        <td><font face="Arial" size="2">1</font></td>
-        <td><font face="Arial" size="2">Bueno</font></td>
-        <td><font face="Arial" size="2">2026-02-19</font></td>
-        <td><font face="Arial" size="2">2026-02-20</font></td>
-        <td><font face="Arial" size="2">Lic. Méndez</font></td>
-        <td bgcolor="#cce4f7"><font face="Arial" size="2" color="#0d2347"><b>Prestado</b></font></td>
-      </tr>
-      <tr bgcolor="#ffffff">
-        <td><font face="Arial" size="2">002</font></td>
-        <td><font face="Arial" size="2">María García Ruiz</font></td>
-        <td><font face="Arial" size="2">5B / IND</font></td>
-        <td><font face="Arial" size="2">Alumno</font></td>
-        <td><font face="Arial" size="2">Proyector</font></td>
-        <td><font face="Arial" size="2">1</font></td>
-        <td><font face="Arial" size="2">Bueno</font></td>
-        <td><font face="Arial" size="2">2026-02-18</font></td>
-        <td><font face="Arial" size="2">2026-02-18</font></td>
-        <td><font face="Arial" size="2">Ing. Torres</font></td>
-        <td bgcolor="#d4edda"><font face="Arial" size="2" color="#155724"><b>Devuelto</b></font></td>
-      </tr>
-      <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-      <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-      <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-      <tr bgcolor="#f5f9ff"><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-      <tr><td style="padding:16px;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-    </table>
-  </td></tr>
-</table>
-
-<br><br>
-
-<!-- ══════════════════
-     DEVOLUCIÓN
-══════════════════ -->
-<a name="devolucion"></a>
-<table width="820" align="center" border="1" bordercolor="#3b9de8" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
-  <tr><td bgcolor="#1a4a8a" style="padding:10px 20px;">
-    <font face="Arial" color="#ffffff" size="2"><b>REGISTRAR DEVOLUCIÓN</b></font>
-  </td></tr>
-  <tr><td style="padding:24px 28px;">
-  <form method="get" action="#">
-
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">N.° Registro:</font></td>
-        <td width="260" style="padding:0 24px 14px 0;"><input type="number" name="devId" placeholder="Ej. 001" min="1" style="width:90px;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-        <td width="120" style="padding:0 10px 14px 0;"><font face="Arial" size="2">Nombre:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="text" name="devNombre" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Nombre completo"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Equipo:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="text" name="devEquipo" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Tipo de equipo"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Condición:</font></td>
-        <td style="padding:0 0 14px 0;">
-          <select name="devCondicion" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;">
-            <option>Bueno</option>
-            <option>Regular</option>
-            <option>Con daño nuevo</option>
-            <option>Deteriorado</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Fecha Dev.:</font></td>
-        <td style="padding:0 24px 14px 0;"><input type="date" name="devFecha" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-        <td style="padding:0 10px 14px 0;"><font face="Arial" size="2">Hora:</font></td>
-        <td style="padding:0 0 14px 0;"><input type="time" name="devHora" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;"></td>
-      </tr>
-      <tr>
-        <td style="padding:0 10px 6px 0;"><font face="Arial" size="2">Encargado:</font></td>
-        <td style="padding:0 24px 6px 0;"><input type="text" name="devEncargado" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Quien recibe"></td>
-        <td style="padding:0 10px 6px 0; vertical-align:top; padding-top:4px;"><font face="Arial" size="2">Observaciones:</font></td>
-        <td style="padding:0 0 6px 0;"><textarea name="devObs" rows="3" style="width:100%;border:1px solid #3b9de8;padding:7px 10px;font-family:Arial;font-size:13px;" placeholder="Notas sobre el estado del equipo…"></textarea></td>
-      </tr>
-    </table>
-
-    <br><br>
-
-    <input type="submit" value="✔ Confirmar Devolución" style="background:#1aad65;color:#fff;border:none;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
-    &nbsp;&nbsp;
-    <input type="reset" value="↺ Limpiar" style="background:#fff;color:#1e6fc0;border:2px solid #1e6fc0;padding:10px 26px;font-family:Arial;font-size:13px;font-weight:bold;cursor:pointer;">
-
-  </form>
-  </td></tr>
-</table>
-
-<br><br>
-
-<table width="820" align="center" border="0">
-  <tr><td align="center" style="padding-bottom:20px;">
-    <font face="Arial" size="1" color="#888">Facultad de Ingeniería Mochis – Universidad Autónoma de Sinaloa</font>
-  </td></tr>
-</table>
+<footer>
+  <p>Facultad de Ingeniería Mochis – Universidad Autónoma de Sinaloa · Coordinación de Cómputo y Uso Escolar</p>
+</footer>
 
 </body>
 </html>
