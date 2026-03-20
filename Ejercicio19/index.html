@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gonzalez Humo-Ejercicio19</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --border: #e8e2db;
+      --accent:  #a8d8b9;
+      --accent2: #f7c5a0;
+      --accent3: #c5b8f0;
+      --accent4: #a8d4f0;
+      --accent5: #f7e6a0;
+      --accent-dk:  #5aaa7a;
+      --accent2-dk: #d4804a;
+      --accent3-dk: #7a60c8;
+      --accent4-dk: #4a9cc8;
+      --text: #2d2a26;
+      --muted: #9e9890;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(168,216,185,.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,216,185,.18) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+    .header { text-align: center; margin-bottom: 60px; animation: fadeDown .8s ease both; }
+    .header .tag {
+      display: inline-block;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent-dk);
+      border: 1.5px solid var(--accent);
+      background: #fff;
+      padding: 4px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--text);
+    }
+    .header h1 span { color: var(--accent-dk); }
+    .methods-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 48px;
+      animation: fadeUp .7s .25s ease both;
+    }
+    @media (max-width: 640px) { .methods-strip { grid-template-columns: repeat(3, 1fr); } }
+    .method-chip {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 10px;
+      text-align: center;
+      font-size: .68rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .method-chip .chip-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .method-chip code { font-size: .63rem; color: var(--muted); word-break: break-all; }
+    .c1 .chip-num { color: var(--accent-dk); }
+    .c2 .chip-num { color: var(--accent4-dk); }
+    .c3 .chip-num { color: #c0504a; }
+    .c4 .chip-num { color: var(--accent2-dk); }
+    .c5 .chip-num { color: var(--accent3-dk); }
+    .profile-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+      animation: fadeUp .8s .2s ease both;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    }
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2));
+    }
+    .avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .profile-info h2 { font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--text); }
+    .profile-info p { color: var(--muted); font-size: .8rem; margin-top: 5px; line-height: 1.7; }
+    .profile-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .badge {
+      font-size: .64rem; padding: 3px 11px; border-radius: 999px;
+      border: 1.5px solid; text-transform: uppercase; letter-spacing: .1em; font-weight: 700;
+    }
+    .badge.green  { color: var(--accent-dk);  border-color: var(--accent);  background: #f0faf4; }
+    .badge.orange { color: var(--accent2-dk); border-color: var(--accent2); background: #fff6f0; }
+    .badge.blue   { color: var(--accent4-dk); border-color: var(--accent4); background: #f0f8ff; }
+    .section { margin-bottom: 30px; animation: fadeUp .7s ease both; }
+    .section:nth-child(4) { animation-delay: .3s; }
+    .section:nth-child(5) { animation-delay: .35s; }
+    .section:nth-child(6) { animation-delay: .4s; }
+    .section:nth-child(7) { animation-delay: .45s; }
+    .section:nth-child(8) { animation-delay: .5s; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+    .method-number {
+      width: 32px; height: 32px; border-radius: 9px;
+      background: var(--accent); color: #fff;
+      font-weight: 700; font-size: .8rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .method-number.blue   { background: var(--accent4);  color: #fff; }
+    .method-number.red    { background: #f0a0a0; color: #7a2020; }
+    .method-number.orange { background: var(--accent2); color: #7a3a10; }
+    .method-number.purple { background: var(--accent3); color: #4a2a90; }
+    .section-header h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .section-header code {
+      font-size: .74rem; color: var(--accent-dk);
+      background: #edf9f2; padding: 2px 9px; border-radius: 5px;
+      border: 1px solid var(--accent);
+    }
+    .section-header .note { font-size: .65rem; color: var(--muted); margin-left: auto; }
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    .code-block { background: #faf9f7; border-bottom: 1.5px solid var(--border); padding: 20px 24px; font-size: .78rem; line-height: 1.9; overflow-x: auto; }
+    .kw  { color: #9060c0; }
+    .fn  { color: #4a80c0; }
+    .str { color: #5aaa60; }
+    .cm  { color: #b0a898; font-style: italic; }
+    .vr  { color: var(--accent-dk); }
+    .nm  { color: #d47030; }
+    .output-area { padding: 16px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .run-btn {
+      flex-shrink: 0; border: none;
+      padding: 10px 22px; border-radius: 9px;
+      font-family: 'Space Mono', monospace; font-size: .74rem; font-weight: 700;
+      cursor: pointer; transition: transform .15s, opacity .15s; letter-spacing: .04em;
+    }
+    .run-btn:hover { opacity: .85; transform: translateY(-1px); }
+    .run-btn.green  { background: var(--accent);  color: #1a5a30; }
+    .run-btn.blue   { background: var(--accent4); color: #1a4a6a; }
+    .run-btn.red    { background: #f0a0a0; color: #7a2020; }
+    .run-btn.orange { background: var(--accent2); color: #7a3a10; }
+    .run-btn.purple { background: var(--accent3); color: #4a2a90; }
+    .output-label { color: var(--muted); font-size: .72rem; line-height: 1.7; }
+    .output-label strong { color: var(--text); display: block; font-size: .8rem; }
+    .result-panel { background: #f9f7f4; border: 1.5px solid var(--border); border-radius: 10px; padding: 16px 20px; margin: 0 24px 18px; font-size: .8rem; line-height: 1.8; display: none; }
+    .result-panel.active { display: block; animation: fadeIn .3s ease; }
+    #innertext-panel { color: #555; white-space: pre-wrap; font-family: 'Space Mono', monospace; font-size: .78rem; }
+    #console-panel { background: #faf9f7; border: 1.5px solid var(--border); border-radius: 10px; padding: 18px 20px; margin: 0 24px 18px; font-size: .76rem; line-height: 1.9; display: none; }
+    #console-panel.active { display: block; animation: fadeIn .3s ease; }
+    #console-panel .ll  { color: var(--accent-dk); }
+    #console-panel .lbl { color: var(--muted); font-size: .65rem; margin-bottom: 6px; }
+    .write-warning { background: #fff4f4; border: 1.5px solid #f0c0c0; border-radius: 10px; padding: 16px 20px; margin: 0 24px 18px; font-size: .76rem; color: #a04040; line-height: 1.8; display: none; }
+    .write-warning.active { display: block; animation: fadeIn .3s ease; }
+    .compare-wrap { margin-top: 48px; animation: fadeUp .7s .55s ease both; }
+    .compare-title { font-family: 'Syne', sans-serif; font-size: .85rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: .74rem; }
+    th { background: #f4f2ef; padding: 12px 14px; text-align: left; color: var(--muted); font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1.5px solid var(--border); }
+    td { padding: 12px 14px; border-bottom: 1px solid #f0ece6; vertical-align: top; line-height: 1.6; }
+    tr:last-child td { border-bottom: none; }
+    .mc { color: var(--accent-dk); font-weight: 700; }
+    .yes { color: var(--accent-dk); }
+    .no  { color: #c06060; }
+    .footer { text-align: center; margin-top: 60px; color: var(--muted); font-size: .72rem; line-height: 2; }
+    .footer span { color: var(--accent-dk); }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:none; } }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(20px);  } to { opacity:1; transform:none; } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="tag">JavaScript · Salidas de Texto</div>
+    <h1>Métodos de <span>Output</span><br>en JavaScript</h1>
+  </div>
+
+  <div class="methods-strip">
+    <div class="method-chip c1"><span class="chip-num">01</span><code>innerHTML</code></div>
+    <div class="method-chip c2"><span class="chip-num">02</span><code>innerText</code></div>
+    <div class="method-chip c3"><span class="chip-num">03</span><code>document.write()</code></div>
+    <div class="method-chip c4"><span class="chip-num">04</span><code>window.alert()</code></div>
+    <div class="method-chip c5"><span class="chip-num">05</span><code>console.log()</code></div>
+  </div>
+
+  <div class="profile-card">
+    <div class="avatar">VG</div>
+    <div class="profile-info">
+      <h2>Victoria Marbella González Humo</h2>
+      <p>marbellahumo@gmail.com &nbsp;·&nbsp;  Los Mochis, Sinaloa &nbsp;·&nbsp;  20 años</p>
+      <div class="profile-badges">
+        <span class="badge green">JavaScript</span>
+        <span class="badge orange">HTML / CSS</span>
+        <span class="badge blue">Desarrollo Web</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. innerHTML -->
+  <div class="section">
+    <div class="section-header">
+      <div class="method-number">1</div>
+      <h3>Modificar contenido HTML</h3>
+      <code>element.innerHTML</code>
+      <span class="note">★ Método más usado</span>
+    </div>
+    <div class="card">
+      <div class="code-block">
+        <span class="cm">// Cambia el HTML interno de un elemento — permite etiquetas</span><br>
+        <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"perfil"</span>).<span class="vr">innerHTML</span> =<br>
+        &nbsp;&nbsp;<span class="str">"&lt;b&gt; Nombre:&lt;/b&gt; Victoria Marbella González Humo&lt;br&gt;"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"&lt;b&gt; Edad:&lt;/b&gt; 20 años&lt;br&gt;"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"&lt;b&gt; Email:&lt;/b&gt; marbellahumo@gmail.com&lt;br&gt;"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"&lt;b&gt; Ciudad:&lt;/b&gt; Los Mochis, Sinaloa"</span>;
+      </div>
+      <div class="output-area">
+        <button class="run-btn green" onclick="runInnerHTML()">▶ Ejecutar</button>
+        <div class="output-label"><strong>innerHTML</strong>Inserta etiquetas HTML — permite texto con formato enriquecido</div>
+      </div>
+      <div class="result-panel" id="innerHTML-panel"></div>
+    </div>
+  </div>
+
+  <!-- 2. innerText -->
+  <div class="section">
+    <div class="section-header">
+      <div class="method-number blue">2</div>
+      <h3>Modificar texto plano</h3>
+      <code>element.innerText</code>
+      <span class="note">Solo texto, sin HTML</span>
+    </div>
+    <div class="card">
+      <div class="code-block">
+        <span class="cm">// Cambia el texto del elemento — NO interpreta etiquetas HTML</span><br>
+        <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"datos-texto"</span>).<span class="vr">innerText</span> =<br>
+        &nbsp;&nbsp;<span class="str">"Nombre : Victoria Marbella González Humo\n"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"Edad   : 20 años\n"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"Email  : marbellahumo@gmail.com\n"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"Ciudad : Los Mochis, Sinaloa"</span>;
+      </div>
+      <div class="output-area">
+        <button class="run-btn blue" onclick="runInnerText()">▶ Ejecutar</button>
+        <div class="output-label"><strong>innerText</strong>Solo texto plano — las etiquetas HTML no se procesan</div>
+      </div>
+      <div class="result-panel" id="innertext-panel"></div>
+    </div>
+  </div>
+
+  <!-- 3. document.write() -->
+  <div class="section">
+    <div class="section-header">
+      <div class="method-number red">3</div>
+      <h3>Escribir en el documento</h3>
+      <code>document.write()</code>
+      <span class="note">⚠ Solo para pruebas</span>
+    </div>
+    <div class="card">
+      <div class="code-block">
+        <span class="cm">// Escribe en el flujo del documento durante la carga</span><br>
+        <span class="cm">// ⚠ Usado DESPUÉS de cargar: borra TODO el HTML de la página</span><br><br>
+        <span class="kw">document</span>.<span class="fn">write</span>(<span class="str">"&lt;p&gt;Nombre: Victoria Marbella González Humo&lt;/p&gt;"</span>);<br>
+        <span class="kw">document</span>.<span class="fn">write</span>(<span class="str">"&lt;p&gt;Edad  : 20 años&lt;/p&gt;"</span>);<br>
+        <span class="kw">document</span>.<span class="fn">write</span>(<span class="str">"&lt;p&gt;Email : marbellahumo@gmail.com&lt;/p&gt;"</span>);<br>
+        <span class="kw">document</span>.<span class="fn">write</span>(<span class="str">"&lt;p&gt;Ciudad: Los Mochis, Sinaloa&lt;/p&gt;"</span>);
+      </div>
+      <div class="output-area">
+        <button class="run-btn red" onclick="showWriteWarning()">▶ Ver advertencia</button>
+        <div class="output-label"><strong>document.write()</strong>Método clásico — si se ejecuta tarde, sobrescribe toda la página</div>
+      </div>
+      <div class="write-warning" id="write-warning">
+        ⚠ <strong>Advertencia:</strong> usar <code>document.write()</code> después de que la página cargó elimina todo el HTML existente.<br><br>
+        El contenido que habría escrito es:<br><br>
+        <code>&lt;p&gt;Nombre: Victoria Marbella González Humo&lt;/p&gt;</code><br>
+        <code>&lt;p&gt;Edad  : 20 años&lt;/p&gt;</code><br>
+        <code>&lt;p&gt;Email : marbellahumo@gmail.com&lt;/p&gt;</code><br>
+        <code>&lt;p&gt;Ciudad: Los Mochis, Sinaloa&lt;/p&gt;</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. window.alert() -->
+  <div class="section">
+    <div class="section-header">
+      <div class="method-number orange">4</div>
+      <h3>Cuadro de diálogo emergente</h3>
+      <code>window.alert()</code>
+      <span class="note">"window" es opcional</span>
+    </div>
+    <div class="card">
+      <div class="code-block">
+        <span class="cm">// Muestra un cuadro de diálogo nativo del navegador</span><br>
+        <span class="cm">// "window" es opcional — es el objeto global de JavaScript</span><br><br>
+        <span class="kw">window</span>.<span class="fn">alert</span>(<br>
+        &nbsp;&nbsp;<span class="str">"===== DATOS PERSONALES =====\n"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"Nombre : Victoria Marbella González Humo\n"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"Edad   : 20 años\n"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"Email  : marbellahumo@gmail.com\n"</span> +<br>
+        &nbsp;&nbsp;<span class="str">"Ciudad : Los Mochis, Sinaloa"</span><br>
+        );
+      </div>
+      <div class="output-area">
+        <button class="run-btn orange" onclick="runAlert()">▶ Ejecutar alert()</button>
+        <div class="output-label"><strong>window.alert()</strong>Abre un cuadro emergente nativo — bloquea la página hasta cerrarlo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. console.log() -->
+  <div class="section">
+    <div class="section-header">
+      <div class="method-number purple">5</div>
+      <h3>Consola del navegador</h3>
+      <code>console.log()</code>
+      <span class="note">F12 → Console</span>
+    </div>
+    <div class="card">
+      <div class="code-block">
+        <span class="cm">// Imprime en la consola del navegador — ideal para debugging</span><br>
+        <span class="cm">// Abre F12 (DevTools) → pestaña "Console" para verlo</span><br><br>
+        <span class="kw">const</span> <span class="vr">persona</span> = {<br>
+        &nbsp;&nbsp;nombre : <span class="str">"Victoria Marbella González Humo"</span>,<br>
+        &nbsp;&nbsp;edad   : <span class="nm">20</span>,<br>
+        &nbsp;&nbsp;email  : <span class="str">"marbellahumo@gmail.com"</span>,<br>
+        &nbsp;&nbsp;ciudad : <span class="str">"Los Mochis, Sinaloa"</span><br>
+        };<br><br>
+        <span class="kw">console</span>.<span class="fn">log</span>(<span class="str">"===== DATOS PERSONALES ====="</span>);<br>
+        <span class="kw">console</span>.<span class="fn">log</span>(<span class="vr">persona</span>);
+      </div>
+      <div class="output-area">
+        <button class="run-btn purple" onclick="runConsole()">▶ Ejecutar</button>
+        <div class="output-label"><strong>console.log()</strong>Resultado simulado abajo · abre F12 → Console para ver la salida real</div>
+      </div>
+      <div id="console-panel"><div class="lbl">▸ CONSOLA OUTPUT</div></div>
+    </div>
+  </div>
+
+  <div class="compare-wrap">
+    <div class="compare-title">Resumen comparativo — 5 métodos</div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Método</th><th>Dónde muestra</th><th>¿HTML?</th><th>Uso principal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td class="mc">innerHTML</td><td>Dentro de un elemento del DOM</td><td class="yes">✔ Sí</td><td>Mostrar datos con formato — método recomendado</td></tr>
+          <tr><td>2</td><td class="mc">innerText</td><td>Dentro de un elemento del DOM</td><td class="no">✘ No</td><td>Solo texto plano sin etiquetas HTML</td></tr>
+          <tr><td>3</td><td class="mc">document.write()</td><td>En el flujo del documento</td><td class="yes">✔ Sí</td><td>Solo durante carga inicial — pruebas simples ⚠</td></tr>
+          <tr><td>4</td><td class="mc">window.alert()</td><td>Cuadro de diálogo emergente</td><td class="no">✘ No</td><td>Avisos rápidos o depuración básica</td></tr>
+          <tr><td>5</td><td class="mc">console.log()</td><td>Consola del navegador (F12)</td><td class="no">✘ No</td><td>Depuración y desarrollo — invisible al usuario</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>JavaScript Output Methods</span><br>
+    Victoria Marbella González Humo · Los Mochis, Sinaloa · 2025
+  </div>
+
+</div>
+<script>
+  function runInnerHTML() {
+    const p = document.getElementById("innerHTML-panel");
+    p.innerHTML =
+      "<div style='font-size:.82rem;line-height:2.2;color:#444'>" +
+      "<strong style='color:#5aaa7a'> Nombre:</strong> Victoria Marbella González Humo<br>" +
+      "<strong style='color:#5aaa7a'> Edad:</strong> 20 años<br>" +
+      "<strong style='color:#5aaa7a'> Email:</strong> marbellahumo@gmail.com<br>" +
+      "<strong style='color:#5aaa7a'> Ciudad:</strong> Los Mochis, Sinaloa" +
+      "</div>";
+    p.classList.add("active");
+  }
+  function runInnerText() {
+    const p = document.getElementById("innertext-panel");
+    p.innerText =
+      "Nombre : Victoria Marbella González Humo\n" +
+      "Edad   : 20 años\n" +
+      "Email  : marbellahumo@gmail.com\n" +
+      "Ciudad : Los Mochis, Sinaloa";
+    p.classList.add("active");
+  }
+  function showWriteWarning() {
+    document.getElementById("write-warning").classList.add("active");
+  }
+  function runAlert() {
+    window.alert(
+      "===== DATOS PERSONALES =====\n" +
+      "Nombre : Victoria Marbella González Humo\n" +
+      "Edad   : 20 años\n" +
+      "Email  : marbellahumo@gmail.com\n" +
+      "Ciudad : Los Mochis, Sinaloa"
+    );
+  }
+  function runConsole() {
+    const persona = {
+      nombre : "Victoria Marbella González Humo",
+      edad   : 20,
+      email  : "marbellahumo@gmail.com",
+      ciudad : "Los Mochis, Sinaloa"
+    };
+    console.log("===== DATOS PERSONALES =====");
+    console.log(persona);
+    const box = document.getElementById("console-panel");
+    box.classList.add("active");
+    box.innerHTML =
+      `<div class="lbl">▸ CONSOLA OUTPUT — simulación (abre F12 → Console para la real)</div>` +
+      `<div class="ll">&gt; "===== DATOS PERSONALES ====="</div>` +
+      `<div class="ll">&gt; {</div>` +
+      `<div class="ll">&nbsp;&nbsp;nombre : <span style="color:#5aaa60">"Victoria Marbella González Humo"</span>,</div>` +
+      `<div class="ll">&nbsp;&nbsp;edad   : <span style="color:#d47030">20</span>,</div>` +
+      `<div class="ll">&nbsp;&nbsp;email  : <span style="color:#5aaa60">"marbellahumo@gmail.com"</span>,</div>` +
+      `<div class="ll">&nbsp;&nbsp;ciudad : <span style="color:#5aaa60">"Los Mochis, Sinaloa"</span></div>` +
+      `<div class="ll">}</div>`;
+  }
+</script>
+</body>
+</html>
