@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gonzalez Humo-Ejercicio20</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --border: #e8e2db;
+      --accent:  #a8d8b9;
+      --accent2: #f7c5a0;
+      --accent3: #c5b8f0;
+      --accent4: #a8d4f0;
+      --accent-dk:  #5aaa7a;
+      --accent2-dk: #d4804a;
+      --accent3-dk: #7a60c8;
+      --accent4-dk: #4a9cc8;
+      --text: #2d2a26;
+      --muted: #9e9890;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(168,216,185,.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,216,185,.18) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+    .header { text-align: center; margin-bottom: 52px; animation: fadeDown .8s ease both; }
+    .header .tag {
+      display: inline-block;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent-dk);
+      border: 1.5px solid var(--accent);
+      background: #fff;
+      padding: 4px 16px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+    }
+    .header h1 span { color: var(--accent-dk); }
+    .vars-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 32px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      animation: fadeUp .7s .2s ease both;
+    }
+    .vars-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2));
+    }
+    .vars-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 18px;
+    }
+    .vars-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 520px) { .vars-row { grid-template-columns: 1fr; } }
+    .var-box {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .var-box label { font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); display: block; margin-bottom: 6px; }
+    .var-box .var-name { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--accent-dk); }
+    .var-box .var-code { font-size: .78rem; color: var(--text); margin-top: 4px; }
+    .var-box .var-code .kw { color: #9060c0; }
+    .var-box .var-code .nm { color: #d47030; }
+    .code-section {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 36px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      animation: fadeUp .7s .3s ease both;
+    }
+    .code-header {
+      background: #f4f2ef;
+      padding: 12px 24px;
+      border-bottom: 1.5px solid var(--border);
+      font-size: .7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    .code-block { padding: 22px 24px; font-size: .78rem; line-height: 2; overflow-x: auto; }
+    .kw  { color: #9060c0; }
+    .fn  { color: #4a80c0; }
+    .str { color: #5aaa60; }
+    .cm  { color: #b0a898; font-style: italic; }
+    .vr  { color: var(--accent-dk); }
+    .nm  { color: #d47030; }
+    .op  { color: #c04060; font-weight: 700; }
+    .results-title {
+      font-family: 'Syne', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 16px;
+      animation: fadeUp .7s .35s ease both;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+      animation: fadeUp .7s .4s ease both;
+    }
+    @media (max-width: 520px) { .results-grid { grid-template-columns: 1fr; } }
+    .result-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.04);
+      transition: transform .2s;
+    }
+    .result-card:hover { transform: translateY(-2px); }
+    .result-card .rc-top { padding: 16px 20px 12px; border-bottom: 1.5px solid var(--border); }
+    .result-card .rc-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 4px; }
+    .result-card .rc-op { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; }
+    .result-card .rc-formula { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+    .result-card .rc-bottom { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .result-card .rc-result { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; }
+    .result-card .rc-symbol { font-size: 2rem; opacity: .25; }
+    .card-suma  .rc-op, .card-suma  .rc-result { color: var(--accent-dk); }
+    .card-suma  .rc-top { background: #f0faf4; }
+    .card-resta .rc-op, .card-resta .rc-result { color: var(--accent2-dk); }
+    .card-resta .rc-top { background: #fff6f0; }
+    .card-div   .rc-op, .card-div   .rc-result { color: var(--accent4-dk); }
+    .card-div   .rc-top { background: #f0f8ff; }
+    .card-exp   .rc-op, .card-exp   .rc-result { color: var(--accent3-dk); }
+    .card-exp   .rc-top { background: #f5f0ff; }
+    .output-panel {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      animation: fadeUp .7s .45s ease both;
+    }
+    .output-panel .op-header {
+      background: #f4f2ef;
+      padding: 12px 24px;
+      border-bottom: 1.5px solid var(--border);
+      font-size: .7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #resultado-html { padding: 22px 24px; font-size: .82rem; line-height: 2.2; color: #555; min-height: 60px; }
+    .footer { text-align: center; margin-top: 60px; color: var(--muted); font-size: .72rem; line-height: 2; animation: fadeUp .7s .5s ease both; }
+    .footer span { color: var(--accent-dk); }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:none; } }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(20px);  } to { opacity:1; transform:none; } }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Operaciones <span>Aritméticas</span><br>con Variables</h1>
+  </div>
+
+  <div class="vars-card">
+    <h2>Variables declaradas</h2>
+    <div class="vars-row">
+      <div class="var-box">
+        <label>Variable 1</label>
+        <div class="var-name">a = 18</div>
+        <div class="var-code"><span class="kw">let</span> a = <span class="nm">18</span>;</div>
+      </div>
+      <div class="var-box">
+        <label>Variable 2</label>
+        <div class="var-name">b = 4</div>
+        <div class="var-code"><span class="kw">let</span> b = <span class="nm">4</span>;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-section">
+    <div class="code-header">Código JavaScript</div>
+    <div class="code-block">
+      <span class="cm">// Declaración de variables</span><br>
+      <span class="kw">let</span> <span class="vr">a</span> = <span class="nm">18</span>;<br>
+      <span class="kw">let</span> <span class="vr">b</span> = <span class="nm">4</span>;<br><br>
+      <span class="cm">// Operaciones aritméticas</span><br>
+      <span class="kw">let</span> <span class="vr">suma</span>          = <span class="vr">a</span> <span class="op">+</span> <span class="vr">b</span>;<br>
+      <span class="kw">let</span> <span class="vr">resta</span>         = <span class="vr">a</span> <span class="op">-</span> <span class="vr">b</span>;<br>
+      <span class="kw">let</span> <span class="vr">division</span>       = <span class="vr">a</span> <span class="op">/</span> <span class="vr">b</span>;<br>
+      <span class="kw">let</span> <span class="vr">exponenciacion</span> = <span class="vr">a</span> <span class="op">**</span> <span class="vr">b</span>;<br><br>
+      <span class="cm">// Mostrar resultados con innerHTML</span><br>
+      <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"resultado-html"</span>).<span class="vr">innerHTML</span> =<br>
+      &nbsp;&nbsp;<span class="str">"&lt;b&gt;Suma:&lt;/b&gt; a + b = "</span> + <span class="vr">suma</span> + <span class="str">"&lt;br&gt;"</span> +<br>
+      &nbsp;&nbsp;<span class="str">"&lt;b&gt;Resta:&lt;/b&gt; a - b = "</span> + <span class="vr">resta</span> + <span class="str">"&lt;br&gt;"</span> +<br>
+      &nbsp;&nbsp;<span class="str">"&lt;b&gt;División:&lt;/b&gt; a / b = "</span> + <span class="vr">division</span> + <span class="str">"&lt;br&gt;"</span> +<br>
+      &nbsp;&nbsp;<span class="str">"&lt;b&gt;Exponenciación:&lt;/b&gt; a ** b = "</span> + <span class="vr">exponenciacion</span>;
+    </div>
+  </div>
+
+  <div class="results-title">Resultados</div>
+  <div class="results-grid">
+    <div class="result-card card-suma">
+      <div class="rc-top">
+        <div class="rc-label">Operación</div>
+        <div class="rc-op">Suma</div>
+        <div class="rc-formula">a + b → 18 + 4</div>
+      </div>
+      <div class="rc-bottom">
+        <div class="rc-result" id="res-suma"></div>
+        <div class="rc-symbol">+</div>
+      </div>
+    </div>
+    <div class="result-card card-resta">
+      <div class="rc-top">
+        <div class="rc-label">Operación</div>
+        <div class="rc-op">Resta</div>
+        <div class="rc-formula">a - b → 18 - 4</div>
+      </div>
+      <div class="rc-bottom">
+        <div class="rc-result" id="res-resta"></div>
+        <div class="rc-symbol">−</div>
+      </div>
+    </div>
+    <div class="result-card card-div">
+      <div class="rc-top">
+        <div class="rc-label">Operación</div>
+        <div class="rc-op">División</div>
+        <div class="rc-formula">a / b → 18 / 4</div>
+      </div>
+      <div class="rc-bottom">
+        <div class="rc-result" id="res-div"></div>
+        <div class="rc-symbol">÷</div>
+      </div>
+    </div>
+    <div class="result-card card-exp">
+      <div class="rc-top">
+        <div class="rc-label">Operación</div>
+        <div class="rc-op">Exponenciación</div>
+        <div class="rc-formula">a ** b → 18 ** 4</div>
+      </div>
+      <div class="rc-bottom">
+        <div class="rc-result" id="res-exp"></div>
+        <div class="rc-symbol">^</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="output-panel">
+    <div class="op-header">
+      <span>Salida con innerHTML</span>
+      <span style="color:var(--accent-dk)">document.getElementById().innerHTML</span>
+    </div>
+    <div id="resultado-html"></div>
+  </div>
+
+  <div class="footer">
+    <span>JavaScript · Aritmética con Variables</span><br>
+    Victoria Marbella González Humo · Los Mochis, Sinaloa · 2026
+  </div>
+
+</div>
+<script>
+  let a = 18;
+  let b = 4;
+
+  let suma           = a + b;
+  let resta          = a - b;
+  let division       = a / b;
+  let exponenciacion = a ** b;
+
+  document.getElementById("res-suma").innerText  = suma;
+  document.getElementById("res-resta").innerText = resta;
+  document.getElementById("res-div").innerText   = division;
+  document.getElementById("res-exp").innerText   = exponenciacion;
+
+  document.getElementById("resultado-html").innerHTML =
+    "<strong style='color:#5aaa7a'>Suma:</strong> a + b = " + suma + "<br>" +
+    "<strong style='color:#d4804a'>Resta:</strong> a - b = " + resta + "<br>" +
+    "<strong style='color:#4a9cc8'>División:</strong> a / b = " + division + "<br>" +
+    "<strong style='color:#7a60c8'>Exponenciación:</strong> a ** b = " + exponenciacion;
+</script>
+</body>
+</html>

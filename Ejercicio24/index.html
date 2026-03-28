@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gonzalez Humo-Ejercicio 24</title>
+  <style>
+    body {
+      background-color: #f9f0fb;
+      font-family: Georgia, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .tarjeta {
+      background-color: #fde8f5;
+      border: 2px solid #e8b4da;
+      border-radius: 16px;
+      padding: 40px 50px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(200, 150, 200, 0.2);
+    }
+
+    h1 {
+      color: #9b5da0;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      font-weight: normal;
+      letter-spacing: 1px;
+    }
+
+    p#fecha {
+      color: #6a3d7a;
+      font-size: 1.6rem;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tarjeta">
+    <h1>Fecha de hoy</h1>
+    <p id="fecha"></p>
+  </div>
+
+  <script>
+    const hoy = new Date();
+
+    const numeroDia  = hoy.getDay();       // 0=domingo … 6=sábado
+    const dia        = hoy.getDate();
+    const numeroMes  = hoy.getMonth();     // 0=enero … 11=diciembre
+    const anio       = hoy.getFullYear();
+
+    let nombreDia;
+    switch (numeroDia) {
+      case 0: nombreDia = "domingo";    break;
+      case 1: nombreDia = "lunes";      break;
+      case 2: nombreDia = "martes";     break;
+      case 3: nombreDia = "miércoles";  break;
+      case 4: nombreDia = "jueves";     break;
+      case 5: nombreDia = "viernes";    break;
+      case 6: nombreDia = "sábado";     break;
+    }
+
+    let nombreMes;
+    switch (numeroMes) {
+      case 0:  nombreMes = "Enero";      break;
+      case 1:  nombreMes = "Febrero";    break;
+      case 2:  nombreMes = "Marzo";      break;
+      case 3:  nombreMes = "Abril";      break;
+      case 4:  nombreMes = "Mayo";       break;
+      case 5:  nombreMes = "Junio";      break;
+      case 6:  nombreMes = "Julio";      break;
+      case 7:  nombreMes = "Agosto";     break;
+      case 8:  nombreMes = "Septiembre"; break;
+      case 9:  nombreMes = "Octubre";    break;
+      case 10: nombreMes = "Noviembre";  break;
+      case 11: nombreMes = "Diciembre";  break;
+    }
+
+    document.getElementById("fecha").textContent =
+      `Hoy es ${nombreDia} ${dia} de ${nombreMes} del año ${anio}`;
+  </script>
+
+</body>
+</html>
