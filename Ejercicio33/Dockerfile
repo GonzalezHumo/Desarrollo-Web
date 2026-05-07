@@ -1,6 +1,6 @@
 FROM php:8.1-apache
+RUN a2dismod mpm_event mpm_worker 2>/dev/null || true && \
+    a2enmod mpm_prefork rewrite
 COPY . /var/www/html/
-RUN a2enmod rewrite
-ENV APACHE_DOCUMENT_ROOT /var/www/html
-CMD ["apache2-foreground"]
 EXPOSE 80
+CMD ["apache2-foreground"]
