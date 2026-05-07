@@ -1,6 +1,6 @@
-FROM php:8.1-apache
-RUN a2dismod mpm_event mpm_worker 2>/dev/null || true && \
-    a2enmod mpm_prefork rewrite
-COPY . /var/www/html/
+FROM php:8.1-cli
+WORKDIR /app
+COPY . /app
 EXPOSE 80
-CMD ["apache2-foreground"]
+CMD ["php", "-S", "0.0.0.0:80", "-t", "/app"]
+ 
