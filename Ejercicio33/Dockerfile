@@ -4,4 +4,3 @@ RUN a2enmod rewrite
 ENV APACHE_DOCUMENT_ROOT /var/www/html
 CMD ["apache2-foreground"]
 EXPOSE 80
- 
